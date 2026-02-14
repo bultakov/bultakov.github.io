@@ -1,124 +1,269 @@
 <!DOCTYPE html>
-<html>
+<html lang="uz">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Bultakov Ibrohim - Python Backend Developer. 6+ yillik Telegram bot rivojlantirish tajribasi. Django, FastAPI, PostgreSQL, Aiogram. Yuboraman.uz CRM platformasi asoschisi." />
-    <meta name="keywords" content="Python developer, Backend developer, Telegram bot, Django, FastAPI, PostgreSQL, Uzbekistan developer, Samarkand developer, CRM integration" />
+    <meta name="description" content="Bultakov Ibrohim - Python Backend Dasturchi. Telegram bot rivojlantirish tajribasi. Django, FastAPI, PostgreSQL, Aiogram. Yuboraman.uz CRM platformasi asoschisi." />
+    <meta name="keywords" content="Python dasturchi, Backend dasturchi, Telegram bot, Django, FastAPI, PostgreSQL, O'zbekiston dasturchi, Samarqand dasturchi, CRM integratsiya" />
     <meta name="author" content="Bultakov Ibrohim" />
-    <title>Bultakov Ibrohim - Python Backend Developer | Telegram Bot Developer</title>
-    <!-- Backend developer tomonidan yozilgan -->
+    <title>Bultakov Ibrohim - Python Backend Dasturchi | Telegram Bot Dasturchisi</title>
+    <!-- Backend dasturchi tomonidan yozilgan -->
     <style>
       /* CSS yozishni bilmayman, lekin StackOverflow'dan ko'chirib oldim */
+      /* P.S. Qorong'i rejim uchun ChatGPT'dan yordam oldim 😅 */
 
-      body {
-        font-family: 'Courier New', monospace; /* Programmergacha font */
-        background-color: #f0f0f0;
-        margin: 20px;
-        color: #000;
+      :root {
+        --bg-color: #f0f0f0;
+        --container-bg: white;
+        --text-color: #000;
+        --header-bg: #333;
+        --header-text: #0f0;
+        --section-bg: #fafafa;
+        --border-color: #ccc;
+        --shadow-color: #888;
+        --accent-color: #0066cc;
+        --hover-bg: #ffff99;
+        --table-even: #e0e0e0;
       }
 
-      /* Borderlar ko'p bo'lsin - bu ishlaydigan belgi! */
+      [data-theme="dark"] {
+        --bg-color: #1a1a1a;
+        --container-bg: #2d2d2d;
+        --text-color: #e0e0e0;
+        --header-bg: #0a0a0a;
+        --header-text: #00ff00;
+        --section-bg: #252525;
+        --border-color: #444;
+        --shadow-color: #000;
+        --accent-color: #4da6ff;
+        --hover-bg: #3a3a3a;
+        --table-even: #1f1f1f;
+      }
+
+      * {
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      body {
+        font-family: 'Courier New', monospace;
+        background-color: var(--bg-color);
+        margin: 20px;
+        color: var(--text-color);
+      }
+
+      /* Qorong'i rejim tugmasi */
+      .theme-switch-wrapper {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+
+      .theme-switch {
+        display: inline-block;
+        height: 34px;
+        position: relative;
+        width: 60px;
+      }
+
+      .theme-switch input {
+        display: none;
+      }
+
+      .slider {
+        background-color: #ccc;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        background-color: white;
+        bottom: 4px;
+        content: "";
+        height: 26px;
+        left: 4px;
+        position: absolute;
+        transition: 0.4s;
+        width: 26px;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #0066cc;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      .slider:after {
+        content: '☀️';
+        position: absolute;
+        left: 8px;
+        top: 5px;
+        font-size: 16px;
+      }
+
+      input:checked + .slider:after {
+        content: '🌙';
+        left: auto;
+        right: 8px;
+      }
+
       h1 {
-        background-color: #333;
-        color: #0f0; /* Terminal rangida bo'lsin */
+        background-color: var(--header-bg);
+        color: var(--header-text);
         padding: 20px;
-        border: 3px solid #000;
+        border: 3px solid var(--border-color);
         text-align: center;
         font-family: monospace;
+        animation: fadeInDown 0.8s ease;
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       h2 {
         background-color: #666;
         color: white;
         padding: 10px;
-        border-left: 10px solid #0066cc; /* Katta border = professional */
+        border-left: 10px solid var(--accent-color);
         margin-top: 30px;
+        animation: slideInLeft 0.6s ease;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
 
       h3 {
-        color: #333;
-        border-bottom: 2px dashed #0066cc; /* Dashed chiziq chiroyli ko'rinadi */
+        color: var(--text-color);
+        border-bottom: 2px dashed var(--accent-color);
         padding-bottom: 5px;
       }
 
-      /* Table - Backend dasturchining eng yaxshi do'sti! */
+
+
       table {
         border-collapse: collapse;
         width: 100%;
         margin: 20px 0;
-        background-color: white;
-        border: 3px solid #000; /* Qalin border = ishonchli */
+        background-color: var(--container-bg);
+        border: 3px solid var(--border-color);
+        animation: fadeIn 1s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
 
       th {
-        background-color: #0066cc;
+        background-color: var(--accent-color);
         color: white;
         padding: 12px;
-        border: 2px solid #000;
+        border: 2px solid var(--border-color);
         text-align: left;
         font-weight: bold;
       }
 
       td {
         padding: 10px;
-        border: 1px solid #666;
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
       }
 
       tr:nth-child(even) {
-        background-color: #e0e0e0; /* Bir rangdan boshqa rang = dizayner */
+        background-color: var(--table-even);
       }
 
       tr:hover {
-        background-color: #ffff99; /* Hover effekt! Frontendchilar maqtaydi! */
+        background-color: var(--hover-bg);
       }
 
-      /* Blockquote - bu nima ekanini bilmayman, lekin kerak bo'lganga o'xshaydi */
       blockquote {
         background-color: #ffffcc;
-        border-left: 5px solid #0066cc;
+        border-left: 5px solid var(--accent-color);
         padding: 15px;
         margin: 20px 0;
         font-style: italic;
       }
 
-      /* Divlar - hamma narsani divga o'rash kerak deyishadi */
+      [data-theme="dark"] blockquote {
+        background-color: #3a3a00;
+        color: #ffff99;
+      }
+
       .container {
         max-width: 1000px;
         margin: 0 auto;
-        background-color: white;
+        background-color: var(--container-bg);
         padding: 20px;
-        border: 5px solid #333; /* Qalin border professional ko'rinadi */
-        box-shadow: 10px 10px 5px #888; /* Shadow qo'shdim - fancy! */
+        border: 5px solid var(--border-color);
+        box-shadow: 10px 10px 20px var(--shadow-color);
+        border-radius: 10px;
+        animation: fadeIn 1s ease;
       }
 
       .section {
         margin: 20px 0;
         padding: 15px;
-        border: 2px solid #ccc;
-        background-color: #fafafa;
+        border: 2px solid var(--border-color);
+        background-color: var(--section-bg);
+        border-radius: 8px;
+        transition: all 0.3s ease;
       }
 
-      /* Link'lar uchun styling */
+      .section:hover {
+        border-color: var(--accent-color);
+      }
+
       a {
-        color: #0066cc;
+        color: var(--accent-color);
         text-decoration: underline;
         font-weight: bold;
+        transition: all 0.3s ease;
       }
 
       a:hover {
-        color: #ff0000; /* Qizil rang = diqqatga sazovor */
-        background-color: yellow; /* Double hover effect! */
+        color: #ff6600;
+        background-color: transparent;
+        text-decoration: none;
       }
 
-      /* Footer - bu yerda ham border kerak */
       .footer {
-        background-color: #333;
+        background-color: var(--header-bg);
         color: white;
         padding: 20px;
         text-align: center;
-        border: 3px solid #000;
+        border: 3px solid var(--border-color);
         margin-top: 30px;
+        border-radius: 8px;
+      }
+
+      .footer a {
+        color: #4CAF50;
       }
 
       .warning {
@@ -129,6 +274,13 @@
         margin: 10px 0;
         text-align: center;
         font-weight: bold;
+        border-radius: 8px;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
       }
 
       ul {
@@ -144,6 +296,73 @@
         padding: 2px 5px;
         border-radius: 3px;
         font-family: 'Courier New', monospace;
+        color: #d63384;
+      }
+
+      [data-theme="dark"] code {
+        background-color: #1a1a1a;
+        color: #ff79c6;
+      }
+
+      /* GitHub stats cards */
+      .github-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+      }
+
+      .github-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 10px;
+        padding: 20px;
+        color: white;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .github-card:hover {
+        transform: translateY(-10px) scale(1.05);
+      }
+
+      .github-card h4 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+      }
+
+      .github-card p {
+        margin: 5px 0;
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      .github-stats {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      /* Project status badge */
+      .status-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: #4CAF50;
+        color: white;
+        animation: blink 2s infinite;
+      }
+
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
       }
 
       /* Mobile Responsive */
@@ -154,8 +373,13 @@
 
         .container {
           padding: 15px;
-          border: 3px solid #333;
-          box-shadow: 5px 5px 3px #888;
+          border: 3px solid var(--border-color);
+          box-shadow: 5px 5px 10px var(--shadow-color);
+        }
+
+        .theme-switch-wrapper {
+          top: 10px;
+          right: 10px;
         }
 
         h1 {
@@ -187,6 +411,10 @@
         .section {
           margin: 15px 0;
           padding: 12px;
+        }
+
+        .github-section {
+          grid-template-columns: 1fr;
         }
 
         blockquote {
@@ -237,13 +465,21 @@
     </style>
   </head>
   <body>
-    <!-- Main container - Hamma narsani divga o'rash kerak deyishadi -->
+    <!-- Dark Mode Toggle -->
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider"></div>
+      </label>
+    </div>
+
+    <!-- Main container -->
     <div class="container">
 
-      <!-- Header - Terminal style! -->
-      <h1>$ whoami<br/>>>> Bultakov Ibrohim - Backend Developer</h1>
+      <!-- Header - Terminal uslubida! -->
+      <h1>$ whoami<br/>>>> Bultakov Ibrohim - Backend Dasturchi</h1>
 
-      <!-- Warning box - Bu professional ko'rinadi -->
+      <!-- Ogohlantirish oynasi - Bu professional ko'rinadi -->
       <div class="warning">
         ⚠️ DIQQAT: Bu saytni Back-End dasturchisi qilgan. Frontend bo'yicha shikoyatlar qabul qilinmaydi!
       </div>
@@ -254,7 +490,7 @@
           <b>// Bio:</b><br/>
           Python Backend dasturchi. Telegram bot rivojlantirish, web-platforma qurish va ma'lumotlar bazasi bilan ishlashda bilimga egaman. Hozirda Yuboraman.uz platformasini boshqaraman va rivojlantiraman.
           <br/><br/>
-          <b>Status:</b> <span style="color: green;">● ONLINE</span> | <b>Stack:</b> Python, FastAPI, Django, FastAPI, PostgreSQL
+          <b>Holat:</b> <span style="color: green;">● ONLAYN</span> | <b>Texnologiyalar:</b> Python, FastAPI, Django, PostgreSQL
         </blockquote>
       </div>
 
@@ -263,10 +499,10 @@
 
       <table>
         <tr>
-          <th>SKILL_ID</th>
-          <th>TECHNOLOGY</th>
-          <th>LEVEL</th>
-          <th>DESCRIPTION</th>
+          <th>KO'NIKMA_ID</th>
+          <th>TEXNOLOGIYA</th>
+          <th>DARAJA</th>
+          <th>TAVSIF</th>
         </tr>
         <tr>
           <td>001</td>
@@ -276,21 +512,21 @@
         </tr>
         <tr>
           <td>002</td>
-          <td><b>Database</b></td>
+          <td><b>Ma'lumotlar bazasi</b></td>
           <td>⭐⭐⭐⭐⭐</td>
-          <td>PostgreSQL (❤️), MySQL. Raw SQL yozishda pro! Database optimization, indexing, query tuning. ORM: SQLAlchemy, Django ORM</td>
+          <td>PostgreSQL (❤️), MySQL. Raw SQL! Ma'lumotlar bazasi optimizatsiyasi, indekslash, so'rov sozlash. ORM: SQLAlchemy, Django ORM</td>
         </tr>
         <tr>
           <td>003</td>
-          <td><b>Telegram Bots</b></td>
+          <td><b>Telegram Botlar</b></td>
           <td>⭐⭐⭐⭐⭐</td>
-          <td>6 yillik tajriba! Aiogram, Pyrogram, Telethon, Payment, webhook, polling. Botlar mening sevimli ishim!</td>
+          <td>AIOgram, Pyrogram, Telethon, To'lov, webhook, polling. Botlar mening sevimli ishim!</td>
         </tr>
         <tr>
           <td>004</td>
           <td><b>DevOps</b></td>
           <td>⭐⭐⭐⭐</td>
-          <td>Linux server (CentOS), Nginx, Gunicorn, Uvicorn, Systemd, Docker, Git version control.</td>
+          <td>Linux server (CentOS), Nginx, Gunicorn, Uvicorn, Systemd, Docker, Git versiya boshqaruvi.</td>
         </tr>
         <tr>
           <td>005</td>
@@ -300,63 +536,105 @@
         </tr>
         <tr>
           <td>006</td>
-          <td><b>API Integration</b></td>
+          <td><b>API Integratsiyasi</b></td>
           <td>⭐⭐⭐⭐</td>
-          <td>Facebook, Tilda, Creatium, CRM (Bitrix24, AmoCRM). Webhook professional. Third-party API bilan do'stman!</td>
+          <td>Facebook, Tilda, Creatium, CRM (Bitrix24, AmoCRM). Webhook professional. Uchinchi tomon API bilan do'stman!</td>
         </tr>
       </table>
 
+      <!-- GitHub Section -->
+      <h2>💻 GITHUB LOYIHALAR</h2>
+      
+      <div class="github-section">
+        <div class="github-card" onclick="window.open('https://github.com/bultakov', '_blank')">
+          <h4>🔗 GitHub Profil</h4>
+          <p>Barcha ochiq manba loyihalarim</p>
+          <div class="github-stats">
+            <div class="stat-item">⭐ Tanlangan loyihalar</div>
+          </div>
+          <p style="margin-top: 10px; font-size: 12px;">github.com/bultakov</p>
+        </div>
+
+        <div class="github-card" onclick="window.open('https://github.com/bultakov', '_blank')" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+          <h4>🚀 Faol repozitoriyalar</h4>
+          <p>Python, Django, FastAPI loyihalar</p>
+          <div class="github-stats">
+            <div class="stat-item">🐍 Python</div>
+            <div class="stat-item">⚡ FastAPI</div>
+          </div>
+        </div>
+
+        <div class="github-card" onclick="window.open('https://github.com/bultakov', '_blank')" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+          <h4>📦 Ochiq manba</h4>
+          <p>Jamiyatga hissa qo'shish</p>
+          <div class="github-stats">
+            <div class="stat-item">💡 Hissalar</div>
+          </div>
+        </div>
+      </div>
+
       <!-- Loyihalar ro'yxati -->
-      <h2>💻 PRODUCTION'DAGI LOYIHALAR</h2>
+      <h2>💼 PRODUCTION'DAGI LOYIHALAR</h2>
 
       <div class="section">
-        <h3>🌐 Yuboraman.uz - CRM Integration SaaS Platform</h3>
+        <h3>🌐 Yuboraman.uz - CRM Integratsiya SaaS Platformasi</h3>
         <p>
-          <b>Tech Stack:</b> FastAPI + PostgreSQL + Celery + Redis + Nginx<br/>
-          <b>Vazifasi:</b> Facebook, Tilda, Creatium'dan kelgan leadlarni avtomatik CRM'larga yuborish<br/>
-          <b>Rolim:</b> Founder & Full-stack Developer<br/>
-          <b>Status:</b> <span style="color: green; font-weight: bold;">✓ ISHLAMOQDA</span><br/>
-          <b>Link:</b> <a href="https://yuboraman.uz/" target="_blank">yuboraman.uz</a>
+          <span class="status-badge">✓ ISHLAMOQDA</span><br/><br/>
+          <b>Texnologiyalar:</b> FastAPI + PostgreSQL + Celery + Redis + Nginx<br/>
+          <b>Vazifasi:</b> Facebook, Tilda, Creatium'dan kelgan lidlarni avtomatik CRM'larga yuborish<br/>
+          <b>Rolim:</b> Asos soluvchi va Full-stack dasturchi<br/>
+          <b>Havola:</b> <a href="https://yuboraman.uz/" target="_blank">yuboraman.uz</a>
         </p>
       </div>
 
       <div class="section">
-        <h3>🤖 Visola - E-commerce Telegram Bot</h3>
+        <h3>🤖 Visola - Elektron Savdo Telegram Boti</h3>
         <p>
-          <b>Tech Stack:</b> Aiogram + PostgreSQL + Payment Gateway<br/>
+          <span class="status-badge">✓ FAOL</span><br/><br/>
+          <b>Texnologiyalar:</b> Aiogram + PostgreSQL + To'lov tizimi<br/>
           <b>Vazifasi:</b> Telegram orqali mahsulot sotish, to'lov qabul qilish, yetkazib berish<br/>
-          <b>Status:</b> <span style="color: green; font-weight: bold;">✓ FAOL</span><br/>
-          <b>Link:</b> <a href="https://t.me/visolauz_bot" target="_blank">@visolauz_bot</a>
+          <b>Havola:</b> <a href="https://t.me/visolauz_bot" target="_blank">@visolauz_bot</a>
         </p>
       </div>
 
       <div class="section">
-        <h3>🎬 Kino va Hayot - Media Content Bot</h3>
+        <h3>🎁 VisolaBall - Ball Hisoblash Dasturi</h3>
         <p>
-          <b>Tech Stack:</b> Aiogram + PostgreSQL + File Management<br/>
+          <span class="status-badge">✓ FAOL</span><br/><br/>
+          <b>Texnologiyalar:</b> Aiogram + PostgreSQL + CRM integratsiyasi<br/>
+          <b>Vazifasi:</b> Yil davomida ball to'plang va Visola korxonasidan kafolatlangan sovg'alardan birini oling 😊<br/>
+          <b>CRM integratsiyasi:</b> SmartUp.online CRM bilan integratsiya qilingan<br/>
+          <b>Havola:</b> <a href="https://t.me/visolaball_bot" target="_blank">@visolaball_bot</a>
+        </p>
+      </div>
+
+      <div class="section">
+        <h3>🎬 Kino va Hayot - Media Kontent Boti</h3>
+        <p>
+          <span class="status-badge">✓ FAOL</span><br/><br/>
+          <b>Texnologiyalar:</b> Aiogram + PostgreSQL + Fayl boshqaruvi<br/>
           <b>Vazifasi:</b> Kino va multimedia kontentni boshqarish va tarqatish<br/>
-        <b>Status:</b> <span style="color: green; font-weight: bold;">✓ FAOL</span><br />
-          <b>Link:</b> <a href="https://t.me/kinovahayot_bot" target="_blank">@kinovahayot_bot</a>
+          <b>Havola:</b> <a href="https://t.me/kinovahayot_bot" target="_blank">@kinovahayot_bot</a>
         </p>
       </div>
 
       <div class="section">
-        <h3>📚 SamDU Axborotnoma - Academic Portal</h3>
+        <h3>📚 SamDU Axborotnoma - Ilmiy Portal</h3>
         <p>
-          <b>Tech Stack:</b> Django + PostgreSQL + File Upload System<br/>
+          <span class="status-badge">✓ FAOL</span><br/><br/>
+          <b>Texnologiyalar:</b> Django + PostgreSQL + Fayl yuklash tizimi<br/>
           <b>Vazifasi:</b> Ilmiy maqolalarni qabul qilish va nashr etish tizimi<br/>
-        <b>Status:</b> <span style="color: green; font-weight: bold;">✓ FAOL</span><br />
-          <b>Link:</b> <a href="https://axborotnoma.uz/" target="_blank">axborotnoma.uz</a>
+          <b>Havola:</b> <a href="https://axborotnoma.uz/" target="_blank">axborotnoma.uz</a>
         </p>
       </div>
 
       <div class="section">
-        <h3>🎉 Tabriklar Bot - Personalized Greeting Cards</h3>
+        <h3>🎉 Tabriklar Bot - Shaxsiylashtirilgan Tabrik Kartalari</h3>
         <p>
-          <b>Tech Stack:</b> Python + Pillow (PIL) + Aiogram<br/>
+          <span class="status-badge">✓ FAOL</span><br/><br/>
+          <b>Texnologiyalar:</b> Python + Pillow (PIL) + Aiogram<br/>
           <b>Vazifasi:</b> Foydalanuvchi ismiga moslashtirilgan tabrik rasmlari<br/>
-        <b>Status:</b> <span style="color: green; font-weight: bold;">✓ FAOL</span><br />
-          <b>Link:</b> <a href="https://t.me/TabriklangBot" target="_blank">@TabriklangBot</a>
+          <b>Havola:</b> <a href="https://t.me/TabriklangBot" target="_blank">@TabriklangBot</a>
         </p>
       </div>
 
@@ -391,7 +669,7 @@
         </tr>
         <tr>
           <td><b>2024-hozir</b></td>
-          <td>Startup Founder</td>
+          <td>Startap asoschisi</td>
           <td>Yuboraman.uz CRM integratsiya platformasini boshqarish va rivojlantirish.</td>
         </tr>
       </table>
@@ -402,21 +680,21 @@
       <div class="section">
         <h3>Ish muhiti va vositalar:</h3>
         <ul>
-          <li><code>git</code> - Version control</li>
+          <li><code>git</code> - Versiya boshqaruvi</li>
           <li><code>python manage.py</code> - Django boshqaruvi</li>
           <li><code>docker-compose</code> - Konteynerlashtirish</li>
-          <li><code>nginx</code> - Web server</li>
-          <li><code>postgresql</code> - Database</li>
+          <li><code>nginx</code> - Veb server</li>
+          <li><code>postgresql</code> - Ma'lumotlar bazasi</li>
           <li><code>systemctl</code> - Linux xizmatlari</li>
         </ul>
 
         <h3>Framework va kutubxonalar:</h3>
         <ul>
-          <li>Django, FastAPI - Backend frameworks</li>
-          <li>Aiogram, Pyrogram, Telethon - Telegram bots</li>
-          <li>SQLAlchemy, Django ORM - Database ORM</li>
+          <li>Django, FastAPI - Backend frameworklar</li>
+          <li>Aiogram, Pyrogram, Telethon - Telegram botlar</li>
+          <li>SQLAlchemy, Django ORM - Ma'lumotlar bazasi ORM</li>
           <li>Celery, Redis - Asinxron vazifalar</li>
-          <li>Pillow - Image processing</li>
+          <li>Pillow - Rasm ishlov berish</li>
         </ul>
       </div>
 
@@ -434,17 +712,47 @@
         <hr style="border: 1px solid #666; margin: 20px 0;"/>
 
         <p style="font-size: 14px; color: #aaa;">
-          © 2024 Bultakov Ibrohim | Backend Developer
+          © 2024 Bultakov Ibrohim | Backend Dasturchi
           <br/>
           <small>Python • FastAPI • Django • PostgreSQL • Telegram Bots</small>
+          <br/><br/>
+          <small style="opacity: 0.7;">Made with ❤️ and a lot of Stack Overflow 😄</small>
         </p>
       </div>
 
     </div>
 
     <script>
-      console.log("Portfolio loaded successfully!");
-      console.log("Contact: @IbrohimBultakov");
+      // Qorong'i rejim - Bu yerda ham Stack Overflow'dan yordam oldim 😅
+      const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+      const currentTheme = localStorage.getItem('theme');
+
+      if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        if (currentTheme === 'dark') {
+          toggleSwitch.checked = true;
+        }
+      }
+
+      function switchTheme(e) {
+        if (e.target.checked) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+          console.log('Qorong\'i rejim yoqildi! 🌙');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+          console.log('Yorug\' rejim yoqildi! ☀️');
+        }
+      }
+
+      toggleSwitch.addEventListener('change', switchTheme, false);
+
+      // Portfolio loaded message
+      console.log("Portfolio muvaffaqiyatli yuklandi!");
+      console.log("Aloqa: @IbrohimBultakov");
+      console.log("GitHub: github.com/bultakov");
+      console.log("💡 Maslahat: O'ng yuqori burchakdagi qorong'i rejimni sinab ko'ring!");
     </script>
 
   </body>
